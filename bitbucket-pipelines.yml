@@ -1,0 +1,36 @@
+# Flutter Pipeline
+
+image: cirrusci/flutter
+
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Dependency
+            script:
+              - flutter pub get
+        - step:
+            name: Lint
+            script:
+              - flutter analyze
+        - step:
+            name: Widget Test
+            script:
+              - flutter test test/widget_test.dart
+
+    # The following deployment steps will be executed for each pipeline run.
+    # To configure your steps and conditionally deploy see
+    # https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
+
+    # TODO: Deployment Pipeline
+    # step:
+    #     name: Deployment to Staging
+    #     deployment: staging
+    #     script:
+    #       - echo "Your deployment to staging script goes here..."
+    # - step:
+    #     name: Deployment to Production
+    #     deployment: production
+    #     trigger: "manual"
+    #     script:
+    #       - echo "Your deployment to production script goes here..."
